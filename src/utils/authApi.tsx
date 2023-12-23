@@ -5,7 +5,7 @@ export const simulateApiLogin = async (email: string, password: string): Promise
 
     // Simulate API response
     if (email === 'user@example.com' && password === 'password123') {
-        return 'your-fetched-token'; // Replace with a real token
+        return 'my-token-111111111'; // Replace with a real token
     } else {
         throw new Error('Invalid email or password');
     }

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../actions/authActions';
+import {simulateApiLogin} from "../utils/authApi";
 
 interface LoginPageProps {
 }
@@ -11,21 +12,29 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // Simulate fetching token from an API based on email and password
-        const fetchedToken = 'your-fetched-token';
+        // const fetchedToken = 'your-fetched-token';
+        const fetchedToken = await simulateApiLogin(email, password);
 
         // Dispatch action to store token in Redux state
         dispatch(loginSuccess(fetchedToken));
+        console.log(loginSuccess(fetchedToken))
 
-        };
+    };
 
     return (
-        <div>
-            <h2>Login Page</h2>
+
+        <div className="wrapper fadeInDown">
+            <div id="formContent">
+
+            <h1>Login Page</h1>
+
             <form>
                 <label>
                     Email:
+                    <br/>
+
                     <input
                         type="email"
                         value={email}
@@ -35,6 +44,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                 <br />
                 <label>
                     Password:
+                    <br/>
                     <input
                         type="password"
                         value={password}
@@ -42,11 +52,14 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                     />
                 </label>
                 <br />
-                <button type="button" onClick={handleLogin}>
+                <button type="button" onClick={handleLogin} className="btn btn-primary">
+                    <span className="spinner-border spinner-border-sm fadeIn fourth"></span>
                     Login
                 </button>
             </form>
         </div>
+        </div>
+
     );
 };
 
