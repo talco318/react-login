@@ -8,7 +8,7 @@ const InfoPage: React.FC = () => {
     const token = useSelector((state: any) => state);
 
 
- //   if(!toke return go to loginoage n)
+ //  TODO: if(!token) return go to login page )
     return (
         <div>
 
