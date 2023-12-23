@@ -4,19 +4,30 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../actions/authActions';
 import { simulateApiLogin } from "../utils/authApi";
 import { isValidValues } from "./validataionFuncs";
+import {useNavigate} from 'react-router-dom';
 
 interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isFormValid, setIsFormValid] = useState(true);
 
     const handleLogin = async () => {
-        const fetchedToken = await simulateApiLogin(email, password);
-        dispatch(loginSuccess(fetchedToken));
-        console.log(loginSuccess(fetchedToken));
+        simulateApiLogin(email, password).then(async (returnValue) => {
+            const response = await returnValue.json();
+            if(returnValue.status === 201) {
+                const {token, personalDetails} = response[0];
+                dispatch(loginSuccess({token, personalDetails}));
+                navigate(`/info`);
+
+            }
+
+
+        })
+
     };
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {

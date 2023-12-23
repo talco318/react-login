@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import LoginPage from './components/LoginPage';
-import WelcomePage from './components/WelcomePage';
+import InfoPage from "./components/InfoPage";
 
 const App: React.FC = () => {
     return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
             <div>
                 <Routes>
                     <Route path="/" element={<LoginPage/>}></Route>
-                    <Route path="/" element={<WelcomePage/>}></Route>
+                    <Route path="/info" element={<InfoPage/>}></Route>
                 </Routes>
             </div>
         </BrowserRouter>

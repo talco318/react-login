@@ -1,7 +1,15 @@
 // src/actions/authActions.ts
-export const loginSuccess = (token: string) => ({
+
+import {PersonalDetails} from "../types/PersonalDetails";
+
+type LoginDetail = {
+    token: string,
+    personalDetails: PersonalDetails
+}
+export const loginSuccess = (loginDetail: LoginDetail) => ({
+
     type: 'LOGIN_SUCCESS',
-    payload: { token },
+    payload: { loginDetail },
 });
 
 export const logout = () => ({

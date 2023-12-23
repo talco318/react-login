@@ -1,12 +1,14 @@
 // src/utils/authApi.ts
-export const simulateApiLogin = async (email: string, password: string): Promise<string> => {
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Simulate API response
-    if (email === 'user@example.com' && password === 'Password123') {
-        return 'my-token-111111111'; // Replace with a real token
-    } else {
-        throw new Error('Invalid email or password');
+export const simulateApiLogin = (email: string, password: string): Promise<any> => {
+    const data = {
+        email: email,
+        password: password
     }
+    return fetch('https://private-052d6-testapi4528.apiary-mock.com/authenticate', {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'}
+    });
+
+
 };
