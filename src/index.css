@@ -343,3 +343,20 @@ input[type=text] placeholder {
     margin: 0 auto;
     scale: 0.7;
 }
+
+.error-message{
+    font-size: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #c25e5e, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+.center-text {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
