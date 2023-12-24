@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../actions/authActions';
 import {apiLogin} from "../utils/authApi";
-import {isValidValues} from "./validataionFuncs";
+import {isValidValues, isValidEmail, checkPasswordValidity} from "./validataionFuncs";
 import {useNavigate} from 'react-router-dom';
 import {PersonalDetails} from "../types/PersonalDetails";
 import {BusinessCardComp} from "./BusinessCardComp";
@@ -17,18 +17,20 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isFormValid, setIsFormValid] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
 
-    function doLogin(token:string, personalDetails: PersonalDetails) {
+    function doLogin(token: string, personalDetails: PersonalDetails) {
         dispatch(loginSuccess({token, personalDetails}));
         navigate(`/info`);
     }
 
     useEffect(() => {
-       const localStorageData = localStorage.getItem('user');
-       if(localStorageData) {
-           const encodedString = JSON.parse(localStorageData);
-           doLogin(encodedString.token, encodedString.personalDetails);
-       }
+        const localStorageData = localStorage.getItem('user');
+        if (localStorageData) {
+            const encodedString = JSON.parse(localStorageData);
+            doLogin(encodedString.token, encodedString.personalDetails);
+        }
     }, [])
     const handleLogin = async () => {
         apiLogin(email, password).then(async (returnValue) => {
@@ -45,13 +47,15 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newEmail = e.target.value;
         const isValid = isValidValues(newEmail, password);
-
+        setIsEmailValid(isValidEmail(newEmail));
         setEmail(newEmail);
         setIsFormValid(isValid);
     };
 
+
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = e.target.value;
+        setIsPasswordValid(checkPasswordValidity(newPassword))
         const isValid = isValidValues(email, newPassword);
         setPassword(newPassword);
         setIsFormValid(isValid);
@@ -66,6 +70,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                     <label>
                         Email:
                         <br/>
+                        {!isEmailValid && <p style={{color: 'red'}}>Email is invalid</p>}
                         <input
                             type="email"
                             value={email}
@@ -76,13 +81,15 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                     <label>
                         Password:
                         <br/>
+                        {!isPasswordValid && <p style={{color: 'red'}}>Password is invalid</p>}
                         <input
                             type="password"
                             value={password}
                             onChange={handlePasswordChange}
                         />
                     </label>
-                    <br/>
+                    <br/><br/>
+
                     <button
                         type="button"
                         onClick={handleLogin}
@@ -95,13 +102,14 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                 </form>
             </div>
             <div className='bottom-component'>
-            Developed by:
+                Developed by:
                 <br/>
                 <a href="https://www.linkedin.com/in/talco318/">
-            <BusinessCardComp  avatar={'https://media.licdn.com/dms/image/D4D03AQEgTv4i4zdlrQ/profile-displayphoto-shrink_200_200/0/1686567516263?e=1709164800&v=beta&t=E9NLBqqKh6ucKS6MU8k8vvIxfTLByhWQe1xoKj9mntQ'}
-                              joinedAt={new Date()}
-                              name={'Tal Cohen'}
-                              Team={'Full Stack'}/>
+                    <BusinessCardComp
+                        avatar={'https://media.licdn.com/dms/image/D4D03AQEgTv4i4zdlrQ/profile-displayphoto-shrink_200_200/0/1686567516263?e=1709164800&v=beta&t=E9NLBqqKh6ucKS6MU8k8vvIxfTLByhWQe1xoKj9mntQ'}
+                        joinedAt={new Date()}
+                        name={'Tal Cohen'}
+                        Team={'Full Stack'}/>
                 </a></div>
 
         </div>
