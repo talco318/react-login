@@ -1,9 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import {PersonalDetails} from "../types/PersonalDetails";
-import {apiLogin, apiTableData} from "../utils/authApi";
-import {dataReceived, loginSuccess} from "../actions/authActions";
+// ProjectsTable.tsx
 
+import React, { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { fetchProjects } from '../utils/authApi';
 
 interface Project {
     id: string;
@@ -14,23 +20,20 @@ interface Project {
     madeDeadline: boolean;
 }
 
+const StyledTableContainer = styled(TableContainer)({
+    width: '80%', // Set the width to 80% of the parent container
+    margin: 'auto', // Center the table
+});
+
 const ProjectList: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
     const [deadlinePercentage, setDeadlinePercentage] = useState<number>(0);
     const [averageScore, setAverageScore] = useState<number>(0);
 
-
-    const fetchProjects = async () => {
+    const fetchData = async () => {
         try {
-            const token = 'YOUR_TOKEN'; // Replace with your actual token
-            const response = await axios.get('https://private-052d6-testapi4528.apiary-mock.com/info', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const data: Project[] = response.data;
+            const data = await fetchProjects();
             setProjects(data);
             setFilteredProjects(data);
         } catch (error) {
@@ -64,7 +67,7 @@ const ProjectList: React.FC = () => {
     };
 
     useEffect(() => {
-        fetchProjects();
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -72,39 +75,36 @@ const ProjectList: React.FC = () => {
     }, [projects]);
 
     return (
-        <div>
-            <div>
-                <p>Deadline Percentage: {deadlinePercentage}%</p>
-                <p>Average Score: {averageScore}</p>
-            </div>
-            <table>
-                <thead>
-                <tr>
-                    <th onClick={() => handleSort('name')}>Name</th>
-                    <th onClick={() => handleSort('score')}>Score</th>
-                    <th onClick={() => handleSort('durationInDays')}>Duration (Days)</th>
-                    <th onClick={() => handleSort('bugsCount')}>Bugs Count</th>
-                    <th onClick={() => handleSort('madeDeadline')}>Made Deadline</th>
-                </tr>
-                </thead>
-                <tbody>
-                {filteredProjects.map((project) => (
-                    <tr
-                        key={project.id}
-                        style={{
-                            backgroundColor: project.score < 70 ? 'red' : project.score > 90 ? 'green' : 'white',
-                        }}
-                    >
-                        <td>{project.name}</td>
-                        <td>{project.score}</td>
-                        <td>{project.durationInDays}</td>
-                        <td>{project.bugsCount}</td>
-                        <td>{project.madeDeadline ? 'Yes' : 'No'}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
+        <StyledTableContainer as={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell onClick={() => handleSort('name')}>Name</TableCell>
+                        <TableCell onClick={() => handleSort('score')}>Score</TableCell>
+                        <TableCell onClick={() => handleSort('durationInDays')}>Duration (Days)</TableCell>
+                        <TableCell onClick={() => handleSort('bugsCount')}>Bugs Count</TableCell>
+                        <TableCell onClick={() => handleSort('madeDeadline')}>Made Deadline</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {filteredProjects.map((project) => (
+                        <TableRow
+                            key={project.id}
+                            style={{
+                                backgroundColor: project.score < 70 ? 'red' : project.score > 90 ? 'green' : 'white',
+                            }}
+                        >
+                            <TableCell>{project.name}</TableCell>
+                            <TableCell>{project.score}</TableCell>
+                            <TableCell>{project.durationInDays}</TableCell>
+                            <TableCell>{project.bugsCount}</TableCell>
+                            <TableCell>{project.madeDeadline ? 'Yes' : 'No'}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            <br />
+        </StyledTableContainer>
     );
 };
 

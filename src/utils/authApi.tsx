@@ -15,17 +15,18 @@ export const apiLogin = (email: string, password: string): Promise<any> => {
 
 };
 
-export const apiTableData = async (token: string): Promise<any> => {
+
+export const fetchProjects = async () => {
     try {
+        const token = 'YOUR_TOKEN'; // Replace with your actual token
         const response = await axios.get('https://private-052d6-testapi4528.apiary-mock.com/info', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-
-        return response.data; // Assuming you want to return the data from the response
+        return response.data;
     } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error; // Re-throw the error to handle it outside this function if needed
+        console.error('Error fetching projects:', error);
+        throw error; // Re-throw the error to handle it in the component
     }
 };
