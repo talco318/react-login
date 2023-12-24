@@ -1,0 +1,38 @@
+/* BusinessCard.css */
+
+.business-card {
+    background: #e1e1e1;
+    border: 1px solid #545454;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.card-header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.card-body {
+    padding-top: 20px;
+}
+
+.card-body h2 {
+    margin-top: 0;
+}
+
+.card-body p {
+    margin: 5px 0;
+}
+
+.card-body strong {
+    display: inline-block;
+    width: 90px;
+}

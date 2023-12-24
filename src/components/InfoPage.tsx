@@ -1,12 +1,14 @@
 // src/components/InfoPage.tsx
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {PersonalDetailsComponent} from "./PersonalDetails";
+import {BusinessCardComp} from "./BusinessCardComp";
 import {InfoErrorComponent} from "./InfoError";
 import ProjectsTable from "./ProjectsTable";
+import {useNavigate} from 'react-router-dom';
 
 const InfoPage: React.FC = () => {
     const responseDetails = useSelector((state: any) => state);
+    const navigate = useNavigate();
 
 
     if (responseDetails.loginDetails.token === null) {
@@ -16,20 +18,39 @@ const InfoPage: React.FC = () => {
         );
     }
 
+    const handleLogout = () => {
+        // Remove user information from localStorage
+        localStorage.removeItem('user');
+
+        // Navigate to the '/' page
+        navigate('/');
+    };
+
 
     return (
-        <div>
+        <div className="site-style">
             <div>
-                <h1>Info Page</h1>
-                {/*{JSON.stringify(responseDetails)}*/}
+                <h1 className="h1-style">Projects Page</h1>
 
-                <PersonalDetailsComponent avatar={responseDetails.loginDetails.personalDetails.avatar}
+                    <button className="logout-button" onClick={handleLogout}>
+                        Logout
+                    </button>
+                    <br/>
+                    <br/>
+                <center>
+
+                    <div>
+                        <BusinessCardComp avatar={responseDetails.loginDetails.personalDetails.avatar}
                                           joinedAt={responseDetails.loginDetails.personalDetails.joinedAt}
                                           name={responseDetails.loginDetails.personalDetails.name}
                                           Team={responseDetails.loginDetails.personalDetails.Team}/>
+                    </div>
+                </center>
+
             </div>
             <div>
                 <ProjectsTable></ProjectsTable>
+
             </div>
         </div>
 

@@ -59,7 +59,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     return (
         <div className="wrapper fadeInDown">
             <div id="formContent">
-                <h1>Login Page</h1>
+                <h1 className="h1-style">Login Page</h1>
 
                 <form>
                     <label>

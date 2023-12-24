@@ -100,8 +100,8 @@ export default function App() {
                     <div>
                         <br/>
                         <br/>
-                        <p>Deadline Percentage: {deadlinePercentage}%</p>
-                        <p>Average Score: {averageScore}</p>
+                        <p className="h2-style">Deadline Percentage: {deadlinePercentage}%</p>
+                        <p className="h2-style">Average Score: {averageScore}</p>
                     </div>
                     <MaterialReactTable table={table}/>;
                 </div>

@@ -293,3 +293,44 @@ input[type=text] placeholder {
         font-weight: bold;
     }
 }
+
+
+.logout-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #2980b9;
+}
+
+
+.h1-style {
+    font-size: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #845ec2, #d65db1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+
+.h2-style {
+    font-size: 26px;
+    font-weight: 550;
+    background: linear-gradient(to right, #39ff0b, #4159ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+.site-style{
+    background-color: #464646;
+}
