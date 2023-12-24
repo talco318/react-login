@@ -12,6 +12,14 @@ export const loginSuccess = (loginDetail: LoginDetail) => ({
     payload: {loginDetail},
 });
 
+
+export const dataReceived = (loginDetail: LoginDetail) => ({
+
+    type: 'DATA_RECEIVED',
+    payload: {loginDetail},
+});
+
+
 export const logout = () => ({
     type: 'LOGOUT',
 });
