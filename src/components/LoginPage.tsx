@@ -1,10 +1,11 @@
 // src/components/LoginPage.tsx
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../actions/authActions';
 import {apiLogin} from "../utils/authApi";
 import {isValidValues} from "./validataionFuncs";
 import {useNavigate} from 'react-router-dom';
+import {PersonalDetails} from "../types/PersonalDetails";
 
 interface LoginPageProps {
 }
@@ -16,13 +17,26 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const [password, setPassword] = useState('');
     const [isFormValid, setIsFormValid] = useState(true);
 
+    function doLogin(token:string, personalDetails: PersonalDetails) {
+        dispatch(loginSuccess({token, personalDetails}));
+        navigate(`/info`);
+    }
+
+    useEffect(() => {
+       const localStorageData = localStorage.getItem('user');
+       if(localStorageData) {
+           const encodedString = JSON.parse(localStorageData);
+           doLogin(encodedString.token, encodedString.personalDetails);
+       }
+    }, [])
     const handleLogin = async () => {
         apiLogin(email, password).then(async (returnValue) => {
             const response = await returnValue.json();
             if (returnValue.status === 201) {
                 const {token, personalDetails} = response[0];
-                dispatch(loginSuccess({token, personalDetails}));
-                navigate(`/info`);
+                doLogin(token, personalDetails);
+                const userAsString = JSON.stringify({token, personalDetails})
+                localStorage.setItem("user", userAsString);
             }
         })
     };
