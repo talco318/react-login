@@ -2,27 +2,30 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {PersonalDetailsComponent} from "./PersonalDetails";
-import {useNavigate} from 'react-router-dom';
+import {InfoErrorComponent} from "./InfoError";
 
 const InfoPage: React.FC = () => {
-    const token = useSelector((state: any) => state);
-    const navigate = useNavigate();
+    const responseDetails = useSelector((state: any) => state);
 
 
-    if (!token) {
-        navigate(`/`);
+    if (responseDetails.loginDetails.token === null) {
+        return (
+            //the user should login to see the details.
+            <InfoErrorComponent></InfoErrorComponent>
+        );
     }
+
 
     return (
         <div>
 
             <h1>Info Page</h1>
-            {JSON.stringify(token)}
+            {JSON.stringify(responseDetails)}
 
-            <PersonalDetailsComponent avatar={token.loginDetails.personalDetails.avatar}
-                                      joinedAt={token.loginDetails.personalDetails.joinedAt}
-                                      name={token.loginDetails.personalDetails.name}
-                                      Team={token.loginDetails.personalDetails.Team}/>
+            <PersonalDetailsComponent avatar={responseDetails.loginDetails.personalDetails.avatar}
+                                      joinedAt={responseDetails.loginDetails.personalDetails.joinedAt}
+                                      name={responseDetails.loginDetails.personalDetails.name}
+                                      Team={responseDetails.loginDetails.personalDetails.Team}/>
         </div>
     );
 };

@@ -9,7 +9,7 @@ type LoginDetail = {
 export const loginSuccess = (loginDetail: LoginDetail) => ({
 
     type: 'LOGIN_SUCCESS',
-    payload: { loginDetail },
+    payload: {loginDetail},
 });
 
 export const logout = () => ({

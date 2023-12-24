@@ -1,12 +1,13 @@
 // src/components/LoginPage.tsx
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../actions/authActions';
-import { simulateApiLogin } from "../utils/authApi";
-import { isValidValues } from "./validataionFuncs";
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {loginSuccess} from '../actions/authActions';
+import {simulateApiLogin} from "../utils/authApi";
+import {isValidValues} from "./validataionFuncs";
 import {useNavigate} from 'react-router-dom';
 
-interface LoginPageProps {}
+interface LoginPageProps {
+}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const handleLogin = async () => {
         simulateApiLogin(email, password).then(async (returnValue) => {
             const response = await returnValue.json();
-            if(returnValue.status === 201) {
+            if (returnValue.status === 201) {
                 const {token, personalDetails} = response[0];
                 dispatch(loginSuccess({token, personalDetails}));
                 navigate(`/info`);
@@ -53,24 +54,24 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                 <form>
                     <label>
                         Email:
-                        <br />
+                        <br/>
                         <input
                             type="email"
                             value={email}
                             onChange={handleEmailChange}
                         />
                     </label>
-                    <br />
+                    <br/>
                     <label>
                         Password:
-                        <br />
+                        <br/>
                         <input
                             type="password"
                             value={password}
                             onChange={handlePasswordChange}
                         />
                     </label>
-                    <br />
+                    <br/>
                     <button
                         type="button"
                         onClick={handleLogin}

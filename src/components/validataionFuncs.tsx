@@ -1,4 +1,3 @@
-
 function checkPasswordValidity(inputText: string): boolean {
     // Check for at least one capital letter
     const hasCapitalLetter = /[A-Z]/.test(inputText);
@@ -22,7 +21,7 @@ function isValidEmail(email: string): boolean {
     return emailRegex.test(email);
 }
 
-export function isValidValues(email: string, password: string): boolean{
+export function isValidValues(email: string, password: string): boolean {
     console.log(email);
     console.log("email is valid?");
     console.log(isValidEmail(email));
