@@ -14,9 +14,6 @@ code {
 
 /* BASIC */
 
-html {
-    background-color: #56baed;
-}
 
 body {
     font-family: "Poppins", sans-serif;
@@ -91,7 +88,6 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset] {
-    background-color: #56baed;
     border: none;
     color: white;
     padding: 15px 80px;
@@ -259,7 +255,6 @@ input[type=text] placeholder {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #56baed;
     content: "";
     transition: width 0.2s;
 }
