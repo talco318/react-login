@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import {useMemo, useState, useEffect} from 'react';
 import {
     MaterialReactTable,
     useMaterialReactTable,
@@ -50,9 +50,9 @@ export default function App() {
 
 
     const getClassNameByScore = (score: number) => {
-        if(!score) return;
-        if(score > 90) return 'green-value';
-        if(score < 70) return 'red-value';
+        if (!score) return;
+        if (score > 90) return 'green-value';
+        if (score < 70) return 'red-value';
 
     }
     const columns = useMemo<MRT_ColumnDef<Project>[]>(
@@ -65,7 +65,9 @@ export default function App() {
             {
                 accessorKey: 'score',
                 header: 'Score',
-                Cell: ({cell})=> (<span className={getClassNameByScore(cell.getValue<number>())} >{cell.getValue<number>()}</span>)            },
+                Cell: ({cell}) => (
+                    <span className={getClassNameByScore(cell.getValue<number>())}>{cell.getValue<number>()}</span>)
+            },
             {
                 accessorKey: 'durationInDays',
                 header: 'Duration (Days)',
@@ -77,7 +79,7 @@ export default function App() {
             {
                 accessorKey: 'madeDadeline',
                 header: 'Made Deadline',
-                Cell: ({ renderedCellValue }) => (renderedCellValue ? 'Yes' : 'No'),
+                Cell: ({renderedCellValue}) => (renderedCellValue ? 'Yes' : 'No'),
             },
         ],
         [],
@@ -92,16 +94,18 @@ export default function App() {
     });
 
     return (
-    <div id="projects-table-page">
-        <center>
         <div>
-            <br/>
-            <br/>
-            <p>Deadline Percentage: {deadlinePercentage}%</p>
-            <p>Average Score: {averageScore}</p>
+            <center>
+                <div id="projects-table-page">
+                    <div>
+                        <br/>
+                        <br/>
+                        <p>Deadline Percentage: {deadlinePercentage}%</p>
+                        <p>Average Score: {averageScore}</p>
+                    </div>
+                    <MaterialReactTable table={table}/>;
+                </div>
+            </center>
         </div>
-        <MaterialReactTable table={table} />;
-        </center>
-    </div>
     );
 }

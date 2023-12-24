@@ -278,11 +278,18 @@ input[type=text] placeholder {
     width: 60%;
 }
 
-#projects-table-page{
-.green-value{
-    color: green;
-}
-.red-value{
+#projects-table-page {
+    width: 80%;
+    align-content: center;
+
+    .green-value {
+        color: green;
+        font-weight: bold;
+
+    }
+
+    .red-value {
         color: red;
-}
+        font-weight: bold;
+    }
 }
