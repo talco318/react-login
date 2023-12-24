@@ -1,6 +1,6 @@
+// src/utils/authApi.ts
 import axios from "axios";
 
-// src/utils/authApi.ts
 export const apiLogin = (email: string, password: string): Promise<any> => {
     const data = {
         email: email,
