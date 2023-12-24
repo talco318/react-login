@@ -5,6 +5,7 @@ import {
     type MRT_ColumnDef,
 } from 'material-react-table';
 import {fetchProjects} from "../utils/authApi";
+import {useSelector} from "react-redux";
 
 interface Project {
     id: string;
@@ -20,6 +21,7 @@ export default function App() {
     const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
     const [deadlinePercentage, setDeadlinePercentage] = useState<number>(0);
     const [averageScore, setAverageScore] = useState<number>(0);
+    const token = useSelector((state: any) => state.loginDetails.token);
 
 
     useEffect(() => {
@@ -28,7 +30,7 @@ export default function App() {
 
     const fetchData = async () => {
         try {
-            const data = await fetchProjects();
+            const data = await fetchProjects(token);
             setProjects(data);
             setFilteredProjects(data);
 
@@ -47,6 +49,12 @@ export default function App() {
     };
 
 
+    const getClassNameByScore = (score: number) => {
+        if(!score) return;
+        if(score > 90) return 'green-value';
+        if(score < 70) return 'red-value';
+
+    }
     const columns = useMemo<MRT_ColumnDef<Project>[]>(
         () => [
             {
@@ -57,7 +65,7 @@ export default function App() {
             {
                 accessorKey: 'score',
                 header: 'Score',
-            },
+                Cell: ({cell})=> (<span className={getClassNameByScore(cell.getValue<number>())} >{cell.getValue<number>()}</span>)            },
             {
                 accessorKey: 'durationInDays',
                 header: 'Duration (Days)',
@@ -84,7 +92,7 @@ export default function App() {
     });
 
     return (
-    <div>
+    <div id="projects-table-page">
         <center>
         <div>
             <br/>

@@ -277,3 +277,12 @@ input[type=text] placeholder {
 #icon {
     width: 60%;
 }
+
+#projects-table-page{
+.green-value{
+    color: green;
+}
+.red-value{
+        color: red;
+}
+}
