@@ -6,7 +6,12 @@ export const apiLogin = (email: string, password: string): Promise<any> => {
         email: email,
         password: password
     }
-    return fetch('https://private-052d6-testapi4528.apiary-mock.com/authenticate', {
+    // return fetch('https://private-052d6-testapi4528.apiary-mock.com/authenticate', {
+    //     method: "POST",
+    //     body: JSON.stringify(data),
+    //     headers: {'Content-Type': 'application/json'}
+    // });
+    return fetch('http://localhost:3001/login', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/json'}
@@ -18,10 +23,14 @@ export const apiLogin = (email: string, password: string): Promise<any> => {
 
 export const fetchProjects = async (tkn: string) => {
     try {
-         // Replace with your actual token
-        const response = await axios.get('https://private-052d6-testapi4528.apiary-mock.com/info', {
+        // const response = await axios.get('https://private-052d6-testapi4528.apiary-mock.com/info', {
+        //     headers: {
+        //         Authorization: `Bearer ${tkn}`,
+        //     },
+        // });
+        const response = await axios.get('http://localhost:3001/projects', {
             headers: {
-                Authorization: `Bearer ${tkn}`,
+                Authorization: `Bearer {{${tkn}}}`,
             },
         });
         return response.data;
