@@ -1,15 +1,13 @@
 // ProjectsTable.tsx
-
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import React, {useState, useEffect} from 'react';
+import {styled} from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { fetchProjects } from '../utils/authApi';
+import {fetchProjects} from '../utils/authApi';
 
 interface Project {
     id: string;
@@ -17,13 +15,10 @@ interface Project {
     score: number;
     durationInDays: number;
     bugsCount: number;
-    madeDeadline: boolean;
+    madeDadeline: boolean;
 }
 
-const StyledTableContainer = styled(TableContainer)({
-    width: '80%', // Set the width to 80% of the parent container
-    margin: 'auto', // Center the table
-});
+
 
 const ProjectList: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -43,8 +38,10 @@ const ProjectList: React.FC = () => {
 
     const calculateMetrics = () => {
         const totalProjects = projects.length;
-        const projectsMetDeadline = projects.filter((project) => project.madeDeadline).length;
-        const projectsAbove90 = projects.filter((project) => project.score > 90).length;
+        const projectsMetDeadline = projects.filter((project) => project.madeDadeline).length;
+
+        console.log(projectsMetDeadline)
+        // const projectsAbove90 = projects.filter((project) => project.score > 90).length;
 
         setDeadlinePercentage((projectsMetDeadline / totalProjects) * 100 || 0);
         setAverageScore(
@@ -75,7 +72,13 @@ const ProjectList: React.FC = () => {
     }, [projects]);
 
     return (
-        <StyledTableContainer as={Paper}>
+        <div>
+            <center>
+
+            <p>Deadline Percentage: {deadlinePercentage}%</p>
+            <p>Average Score: {averageScore}</p>
+
+        <TableContainer style={{ width: '80%' }}>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -83,7 +86,7 @@ const ProjectList: React.FC = () => {
                         <TableCell onClick={() => handleSort('score')}>Score</TableCell>
                         <TableCell onClick={() => handleSort('durationInDays')}>Duration (Days)</TableCell>
                         <TableCell onClick={() => handleSort('bugsCount')}>Bugs Count</TableCell>
-                        <TableCell onClick={() => handleSort('madeDeadline')}>Made Deadline</TableCell>
+                        <TableCell onClick={() => handleSort('madeDadeline')}>Made Deadline</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -98,13 +101,16 @@ const ProjectList: React.FC = () => {
                             <TableCell>{project.score}</TableCell>
                             <TableCell>{project.durationInDays}</TableCell>
                             <TableCell>{project.bugsCount}</TableCell>
-                            <TableCell>{project.madeDeadline ? 'Yes' : 'No'}</TableCell>
+                            <TableCell>{project.madeDadeline ? 'Yes' : 'No'}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-            <br />
-        </StyledTableContainer>
+            <br/>
+        </TableContainer >
+        </center>
+        </div>
+
     );
 };
 
