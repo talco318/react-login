@@ -16,12 +16,12 @@ export const apiLogin = (email: string, password: string): Promise<any> => {
 };
 
 
-export const fetchProjects = async () => {
+export const fetchProjects = async (tkn: string) => {
     try {
-        const token = 'YOUR_TOKEN'; // Replace with your actual token
+         // Replace with your actual token
         const response = await axios.get('https://private-052d6-testapi4528.apiary-mock.com/info', {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tkn}`,
             },
         });
         return response.data;
