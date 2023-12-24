@@ -334,3 +334,12 @@ input[type=text] placeholder {
 .site-style{
     background-color: #464646;
 }
+
+.bottom-component {
+    position: absolute;
+    top: 650px;
+    left: 0;
+    height: auto;
+    margin: 0 auto;
+    scale: 0.7;
+}
