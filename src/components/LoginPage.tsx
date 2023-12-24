@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {loginSuccess} from '../actions/authActions';
-import {simulateApiLogin} from "../utils/authApi";
+import {apiLogin} from "../utils/authApi";
 import {isValidValues} from "./validataionFuncs";
 import {useNavigate} from 'react-router-dom';
 
@@ -17,18 +17,14 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const [isFormValid, setIsFormValid] = useState(true);
 
     const handleLogin = async () => {
-        simulateApiLogin(email, password).then(async (returnValue) => {
+        apiLogin(email, password).then(async (returnValue) => {
             const response = await returnValue.json();
             if (returnValue.status === 201) {
                 const {token, personalDetails} = response[0];
                 dispatch(loginSuccess({token, personalDetails}));
                 navigate(`/info`);
-
             }
-
-
         })
-
     };
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
