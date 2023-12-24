@@ -22,13 +22,6 @@ function isValidEmail(email: string): boolean {
 }
 
 export function isValidValues(email: string, password: string): boolean {
-    console.log(email);
-    console.log("email is valid?");
-    console.log(isValidEmail(email));
-    console.log(password);
-    console.log("password is valid?");
-    console.log(checkPasswordValidity(password));
-
     return !isValidEmail(email) || !checkPasswordValidity(password)
 }
 
