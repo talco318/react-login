@@ -1,4 +1,4 @@
-## About this project: 
+# About this project: 
 
 This project is a front-end (react app) for <a href="https://github.com/talco318/my-project-app-serve">the server project</a>.
 This app was developed with TypeScript and React. 
@@ -6,7 +6,7 @@ This app was developed with TypeScript and React.
 Sample user for testing available in:
 ### 'src/DemoVars.ts'
 
-# To run this app:
+## To run this app:
 
 ### `npm start`
 Runs the app in the development mode.\
