@@ -7,6 +7,7 @@ import {isValidValues, isValidEmail, checkPasswordValidity} from "./validataionF
 import {useNavigate} from 'react-router-dom';
 import {PersonalDetails} from "../types/PersonalDetails";
 import {BusinessCardComp} from "./BusinessCardComp";
+import {MOCK_LOGIN_DETAILS} from "../DemoVars";
 
 interface LoginPageProps {
 }
@@ -19,7 +20,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     const [isFormValid, setIsFormValid] = useState(true);
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
-
+    const[errorMessage, setErrorMessage] = useState('');
     function doLogin(token: string, personalDetails: PersonalDetails) {
         dispatch(loginSuccess({token, personalDetails}));
         navigate(`/info`);
@@ -33,15 +34,21 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         }
     }, [])
     const handleLogin = async () => {
-        apiLogin(email, password).then(async (returnValue) => {
-            const response = await returnValue.json();
-            if (returnValue.status === 201) {
-                const {token, personalDetails} = response[0];
-                doLogin(token, personalDetails);
-                const userAsString = JSON.stringify({token, personalDetails})
-                localStorage.setItem("user", userAsString);
-            }
-        })
+        if(email===MOCK_LOGIN_DETAILS.email && password===MOCK_LOGIN_DETAILS.password) {
+            setErrorMessage('');
+            apiLogin(email, password).then(async (returnValue) => {
+                const response = await returnValue.json();
+                if (returnValue.status === 201) {
+                    const {token, personalDetails} = response[0];
+                    doLogin(token, personalDetails);
+                    const userAsString = JSON.stringify({token, personalDetails})
+                    localStorage.setItem("user", userAsString);
+                }
+            })
+        }else{
+            setErrorMessage('Login details incorrect!');
+        }
+
     };
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +106,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                         <span className="spinner-border spinner-border-sm fadeIn fourth"></span>
                         Login
                     </button>
+                   <div className='error'> {errorMessage}</div>
                 </form>
             </div>
             <div className='bottom-component'>

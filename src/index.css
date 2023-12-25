@@ -368,3 +368,7 @@ body, html {
     background-color: #464646;
     height: 100%;
 }
+
+.error{
+    color: red;
+}
