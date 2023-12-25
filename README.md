@@ -4,7 +4,7 @@ This project is a front-end (react app) for <a href="https://github.com/talco318
 This app was developed with TypeScript and React. 
 
 Sample user for testing available in:
-src/DemoVars.ts
+'src/DemoVars.ts'
 
 
 ### `npm start`
