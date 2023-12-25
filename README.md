@@ -9,5 +9,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 Developed by: 
+
 Tal Cohen
+
 <a href="https://www.linkedin.com/in/talco318/" target="_blank">LinkedIn</a>
