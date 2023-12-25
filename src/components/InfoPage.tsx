@@ -6,11 +6,11 @@ import {InfoErrorComponent} from "./InfoError";
 import ProjectsTable from "./ProjectsTable";
 import {useNavigate} from 'react-router-dom';
 import {logout} from "../actions/authActions";
-const dispatch = useDispatch();
 
 const InfoPage: React.FC = () => {
     const responseDetails = useSelector((state: any) => state);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     if (responseDetails.loginDetails.token === null) {
