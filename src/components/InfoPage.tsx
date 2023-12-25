@@ -1,10 +1,12 @@
 // src/components/InfoPage.tsx
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {BusinessCardComp} from "./BusinessCardComp";
 import {InfoErrorComponent} from "./InfoError";
 import ProjectsTable from "./ProjectsTable";
 import {useNavigate} from 'react-router-dom';
+import {logout} from "../actions/authActions";
+const dispatch = useDispatch();
 
 const InfoPage: React.FC = () => {
     const responseDetails = useSelector((state: any) => state);
@@ -21,7 +23,7 @@ const InfoPage: React.FC = () => {
     const handleLogout = () => {
         // Remove user information from localStorage
         localStorage.removeItem('user');
-
+        dispatch(logout());
         // Navigate to the '/' page
         navigate('/');
     };
