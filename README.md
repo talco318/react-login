@@ -1,5 +1,9 @@
-## Available Scripts
-In the project directory, you can run:
+## About this project: 
+
+This project is a front-end (react app) for <a href="https://github.com/talco318/my-project-app-serve">the server project</a>.
+This app was developed with TypeScript and React. 
+
+
 
 ### `npm start`
 Runs the app in the development mode.\
