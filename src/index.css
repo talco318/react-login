@@ -360,3 +360,11 @@ input[type=text] placeholder {
     justify-content: center;
     align-items: center;
 }
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #464646;
+    height: 100%;
+}
