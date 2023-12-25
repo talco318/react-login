@@ -1,6 +1,6 @@
 # About this project: 
 
-This project is a front-end (react app) for <a href="https://github.com/talco318/my-project-app-serve">the server project</a>.
+This project is a front-end (react app) for <a href="https://github.com/talco318/my-project-app-server">the server project</a>.
 This app was developed with TypeScript and React. 
 
 Sample user for testing available in:
