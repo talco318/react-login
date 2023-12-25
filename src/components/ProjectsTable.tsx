@@ -1,9 +1,5 @@
-import {useMemo, useState, useEffect} from 'react';
-import {
-    MaterialReactTable,
-    useMaterialReactTable,
-    type MRT_ColumnDef,
-} from 'material-react-table';
+import React, {useMemo, useState, useEffect} from 'react';
+import {MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef} from 'material-react-table';
 import {fetchProjects} from "../utils/authApi";
 import {useSelector} from "react-redux";
 
@@ -16,13 +12,12 @@ interface Project {
     madeDadeline: boolean;
 }
 
-export default function App() {
+const App = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
     const [deadlinePercentage, setDeadlinePercentage] = useState<number>(0);
     const [averageScore, setAverageScore] = useState<number>(0);
     const token = useSelector((state: any) => state.loginDetails.token);
-
 
     useEffect(() => {
         fetchData();
@@ -48,13 +43,13 @@ export default function App() {
         }
     };
 
-
     const getClassNameByScore = (score: number) => {
-        if (!score) return;
+        if (!score) return '';
         if (score > 90) return 'green-value';
         if (score < 70) return 'red-value';
+        return '';
+    };
 
-    }
     const columns = useMemo<MRT_ColumnDef<Project>[]>(
         () => [
             {
@@ -103,9 +98,11 @@ export default function App() {
                         <p className="h2-style">Deadline Percentage: {deadlinePercentage}%</p>
                         <p className="h2-style">Average Score: {averageScore}</p>
                     </div>
-                    <MaterialReactTable table={table}/>;
+                    <MaterialReactTable table={table}/>
                 </div>
             </center>
         </div>
     );
-}
+};
+
+export default App;
