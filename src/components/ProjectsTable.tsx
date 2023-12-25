@@ -1,16 +1,10 @@
+//src/components/ProjectsTable.tsx :
+
 import React, {useMemo, useState, useEffect} from 'react';
 import {MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef} from 'material-react-table';
 import {fetchProjects} from "../utils/authApi";
 import {useSelector} from "react-redux";
-
-interface Project {
-    id: string;
-    name: string;
-    score: number;
-    durationInDays: number;
-    bugsCount: number;
-    madeDadeline: boolean;
-}
+import {Project} from "../types/Project"
 
 const App = () => {
     const [projects, setProjects] = useState<Project[]>([]);

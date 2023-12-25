@@ -106,10 +106,10 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                 <br/>
                 <a href="https://www.linkedin.com/in/talco318/">
                     <BusinessCardComp
-                        avatar={'https://media.licdn.com/dms/image/D4D03AQEgTv4i4zdlrQ/profile-displayphoto-shrink_200_200/0/1686567516263?e=1709164800&v=beta&t=E9NLBqqKh6ucKS6MU8k8vvIxfTLByhWQe1xoKj9mntQ'}
+                        avatar='https://media.licdn.com/dms/image/D4D03AQEgTv4i4zdlrQ/profile-displayphoto-shrink_200_200/0/1686567516263?e=1709164800&v=beta&t=E9NLBqqKh6ucKS6MU8k8vvIxfTLByhWQe1xoKj9mntQ'
                         joinedAt={new Date()}
-                        name={'Tal Cohen'}
-                        Team={'Full Stack'}/>
+                        name='Tal Cohen'
+                        Team='Full Stack'/>
                 </a></div>
 
         </div>
