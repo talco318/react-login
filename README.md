@@ -17,12 +17,7 @@ Dynamic Insights: Calculate and display average score and met deadlines percenta
 React & TypeScript for a robust and modern frontend.
 React Table for flexible and performant data presentation.
 Mock API integration showcasing communication and data handling.
-Note: This repository showcases the frontend component only. Backend and database integration is required for complete functionality.
 
-The server for this available <a href="https://github.com/talco318/my-project-app-server">here</a>.
-
-Sample user for testing available in:
-### 'src/DemoVars.ts'
 
 ## To run this app:
 
@@ -32,6 +27,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+
+
+
+Note: This repository showcases the frontend component only. Backend and database integration is required for complete functionality.
+
+The server for this available <a href="https://github.com/talco318/my-project-app-server">here</a>.
+
+Sample user for testing available in:
+**'src/DemoVars.ts'**
+
 
 ## Developed by:
 
