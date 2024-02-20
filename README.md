@@ -18,6 +18,7 @@ React & TypeScript for a robust and modern frontend.
 React Table for flexible and performant data presentation.
 Mock API integration showcasing communication and data handling.
 Note: This repository showcases the frontend component only. Backend and database integration is required for complete functionality.
+
 The server for this available <a href="https://github.com/talco318/my-project-app-server">here</a>.
 
 Sample user for testing available in:
